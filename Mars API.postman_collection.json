@@ -1,0 +1,6474 @@
+{
+	"info": {
+		"_postman_id": "c8ba6251-551e-4951-8861-c15eb05dcc09",
+		"name": "Mars API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26345068",
+		"_collection_link": "https://www.postman.com/material-technologist-38066219/workspace/ada-s-api-testing/collection/26345068-c8ba6251-551e-4951-8861-c15eb05dcc09?action=share&source=collection_link&creator=26345068"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "validRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"Ada\",\r\n\"lastName\":\"Zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz300@gmail.com\",\r\n\"password\":\"12345678\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "existingUserRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema ={\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"Zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz105@gmail.com\",\r\n\"password\":\"123456\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "empatyFirstnameRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"\",\r\n\"lastName\":\"Zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz301@gmail.com\",\r\n\"password\":\"123456\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalidFirstNameRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"1234\",\r\n\"lastName\":\"Zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz3022@gmail.com\",\r\n\"password\":\"123456\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emptyLastNameRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz303@gmail.com\",\r\n\"password\":\"123456\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalidLastNameRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"1234\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz304@gmail.com\",\r\n\"password\":\"123456\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emptyPasswordRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz305@gmail.com\",\r\n\"password\":\"\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalidPasswordRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz306@gmailcom\",\r\n\"password\":\"1234\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emptyEmailRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"\",\r\n\"password\":\"12345678\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalidEmailRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz307gmailcom\",\r\n\"password\":\"12345678\",\r\n\"terms\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "disagreeTermsRegister",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Schema \r",
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"  pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\":\"randomFirstName\",\r\n\"lastName\":\"zhang\",\r\n\"countryDialCode\":\"\",\r\n\"mobilePhone\":\"\",\r\n\"email\":\"adawhz308@gmailcom\",\r\n\"password\":\"12345678\",\r\n\"terms\":false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signup",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"token\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"token\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"expires\": {\r",
+									"          \"type\": \"number\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"token\",\r",
+									"        \"expires\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"token\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(true);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"mars.advanced@example.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emptyEmailSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalidEmailSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"token\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"token\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"expires\": {\r",
+									"          \"type\": \"number\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"token\",\r",
+									"        \"expires\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"token\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"mars.advancedexample.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unregisteredEmailSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"mars.advanced110000000@example.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "emptyPasswordSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"mars.advanced@example.com\",\r\n  \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "wrongPasswordSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"mars.advanced@example.com\",\r\n  \"password\": \"123456780\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "invalidPasswordSignIn",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isSuccess\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"token\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"token\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"expires\": {\r",
+									"          \"type\": \"number\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"token\",\r",
+									"        \"expires\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isSuccess\",\r",
+									"    \"token\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.false;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isSuccess).to.eql(false);\r",
+									"});\r",
+									"if (jsonData.isSuccess){\r",
+									"    pm.environment.set(\"token\", jsonData.token.token);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rememberMe\": true,\r\n  \"email\": \"mars.advanced@example.com\",\r\n  \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlAuth}}/authentication/authentication/signin",
+							"host": [
+								"{{baseUrlAuth}}"
+							],
+							"path": [
+								"authentication",
+								"authentication",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "certification",
+			"item": [
+				{
+					"name": "addCertification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									" //Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"certificationId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificationName\": \"ISTQB\",\r\n  \"certificationFrom\": \"ISTQB\",\r\n  \"certificationYear\": \"2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCertificationWithoutFrom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									" //Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"certificationId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificationName\": \"Junior Tester\",\r\n  \"certificationFrom\": \"\",\r\n  \"certificationYear\": \"2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCertification Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"certificationName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"certificationName\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //certification name check\r",
+									"    pm.expect(jsonData.certificationName).to.eql(\"Junior Tester\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCertificationWithoutName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									" //Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"certificationId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificationName\": \"\",\r\n  \"certificationFrom\": \"China\",\r\n  \"certificationYear\": \"2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCertification Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"certificationName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"certificationName\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //certification name check\r",
+									"    pm.expect(jsonData.certificationName).to.eql(\"\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addCertificationWithEmptyYear",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									" //Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"certificationId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificationName\": \"ISTQB\",\r\n  \"certificationFrom\": \"ISTQB\",\r\n  \"certificationYear\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add existing certi",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 2 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"    pm.expect(jsonData.message).to.eql(\"This information is already exist.\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"certificationName\": \"ISTQB\",\r\n  \"certificationFrom\": \"ISTQB\",\r\n  \"certificationYear\": \"2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCertification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"id\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"certificationName\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"certificationFrom\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"certificationYear\": {\r",
+									"        \"type\": \"number\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"id\",\r",
+									"      \"certificationName\",\r",
+									"      \"certificationFrom\",\r",
+									"      \"certificationYear\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {   \r",
+									"    pm.expect(jsonData.length).to.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCertification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\",\r\n  \"certificationName\": \"Testing\",\r\n  \"certificationFrom\": \"Udemy\",\r\n  \"certificationYear\": 2018\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCertificationWithoutName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\",\r\n  \"certificationName\": \"\",\r\n  \"certificationFrom\": \"USA\",\r\n  \"certificationYear\": 2018\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCertificationWithoutFrom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\",\r\n  \"certificationName\": \"Math Master\",\r\n  \"certificationFrom\": \"\",\r\n  \"certificationYear\": 2018\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCertificationWithoutYear",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\",\r\n  \"certificationName\": \"Testing\",\r\n  \"certificationFrom\": \"Udemy\",\r\n  \"certificationYear\": \r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update existing certi",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {   \r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"    pm.expect(jsonData.message).to.eql(\"This information is already exist.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\",\r\n  \"certificationName\": \"Testing\",\r\n  \"certificationFrom\": \"Udemy\",\r\n  \"certificationYear\": 2018\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateCertification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCertification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"certificationName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"certificationName\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //certification name check\r",
+									"    pm.expect(jsonData.certificationName).to.eql(\"Testing\");\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{certificationId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteCertification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteCertification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "language",
+			"item": [
+				{
+					"name": "addLanguage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {    \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"languageId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mandarin\",\r\n  \"level\": \"Native/Bilingual\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addLanguageWithEmptyLanguageName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {    \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"languageId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"\",\r\n  \"level\": \"Beginner\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLanguage Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"language\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"language\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {   \r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //language deleted check\r",
+									"    pm.expect(jsonData.language).to.eql(\"\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{languageId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addLanguageWithoutLanLevel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {    \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"languageId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Thailand\",\r\n  \"level\": \"\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLanguage Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"language\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"language\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {   \r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //language deleted check\r",
+									"    pm.expect(jsonData.language).to.eql(\"Thailand\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{languageId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add existing language",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"    pm.expect(jsonData.message).to.eql(\"This language is already exist in your language list.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Mandarin\",\r\n  \"level\": \"Native/Bilingual\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLanguage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"personLanguageId\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"language\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"languageLevel\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"personLanguageId\",\r",
+									"      \"language\",\r",
+									"      \"languageLevel\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData.length).to.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLanguage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //Message check\r",
+									"    pm.expect(jsonData.message).to.eql(\"Language added successfully\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{languageId}}\",\r\n  \"name\": \"English\",\r\n  \"level\": \"Basic\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update same language",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"    pm.expect(jsonData.message).to.eql(\"This language is already added to your language list.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{languageId}}\",\r\n  \"name\": \"English\",\r\n  \"level\": \"Basic\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateLanguage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLanguage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"language\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"language\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {   \r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //language deleted check\r",
+									"    pm.expect(jsonData.language).to.eql(\"English\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{languageId}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteLanguage",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteLanguage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "listing",
+			"item": [
+				{
+					"name": "getMultipleListing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {   \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.data.length).to.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"offset\": 0,\r\n  \"limit\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/getMultipleServiceListing",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"getMultipleServiceListing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addListing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"editFlag\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\",\r",
+									"    \"editFlag\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {  \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"pm.environment.set(\"listingId\", jsonData.id);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Lyric Teaching\",\r\n  \"description\": \"Music teaching service\",\r\n  \"categoryId\": \"4\",\r\n  \"subcategoryId\": \"3\",\r\n  \"tags\": [\r\n    {\r\n      \"id\": \"music\",\r\n      \"text\": \"teaching\"\r\n    }\r\n  ],\r\n  \"serviceType\": \"1\",\r\n  \"locationType\": \"0\",\r\n  \"availability\": {\r\n    \"startDate\": \"2024-02-02\",\r\n    \"endDate\": \"2024-07-27\",\r\n    \"dayEntries\": [\r\n      {\r\n        \"StartTime\": \"\",\r\n        \"EndTime\": \"\",\r\n        \"Available\": false\r\n      },\r\n      {\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"12:00\",\r\n        \"Available\": false\r\n      },\r\n      {\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"17:00\",\r\n        \"Available\": false\r\n      },\r\n      {\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"17:00\",\r\n        \"Available\": false\r\n      },\r\n      {\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"12:00\",\r\n        \"Available\": false\r\n      },\r\n      {\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"12:00\",\r\n        \"Available\": false\r\n      },\r\n      {\r\n        \"StartTime\": \"\",\r\n        \"EndTime\": \"\",\r\n        \"Available\": false\r\n      }\r\n    ]\r\n  },\r\n  \"skillTrade\": [\r\n    {\r\n      \"id\": \"dancing\",\r\n      \"text\": \"dancing\"\r\n    }\r\n  ],\r\n  \"isTradable\": true,\r\n  \"charge\": 0,\r\n  \"credentials\": true,\r\n  \"isActive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/addListing",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"addListing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"serviceListing\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"sellerId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"charge\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"title\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"serviceType\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"locationType\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"availability\": {\r",
+									"          \"type\": \"object\",\r",
+									"          \"properties\": {\r",
+									"            \"startDate\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"endDate\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"dayEntries\": {\r",
+									"              \"type\": \"array\",\r",
+									"              \"items\": {\r",
+									"                \"type\": \"object\",\r",
+									"                \"properties\": {\r",
+									"                  \"startTime\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                  },\r",
+									"                  \"endTime\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                  },\r",
+									"                  \"available\": {\r",
+									"                    \"type\": \"boolean\"\r",
+									"                  }\r",
+									"                },\r",
+									"                \"required\": [\r",
+									"                  \"startTime\",\r",
+									"                  \"endTime\",\r",
+									"                  \"available\"\r",
+									"                ]\r",
+									"              }\r",
+									"            }\r",
+									"          },\r",
+									"          \"required\": [\r",
+									"            \"startDate\",\r",
+									"            \"endDate\",\r",
+									"            \"dayEntries\"\r",
+									"          ]\r",
+									"        },\r",
+									"        \"workSample\": {},\r",
+									"        \"categoryId\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"subcategoryId\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"tags\": {\r",
+									"          \"type\": \"array\",\r",
+									"          \"items\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"              \"id\": {\r",
+									"                \"type\": \"string\"\r",
+									"              },\r",
+									"              \"text\": {\r",
+									"                \"type\": \"string\"\r",
+									"              }\r",
+									"            },\r",
+									"            \"required\": [\r",
+									"              \"id\",\r",
+									"              \"text\"\r",
+									"            ]\r",
+									"          }\r",
+									"        },\r",
+									"        \"comments\": {},\r",
+									"        \"ratings\": {},\r",
+									"        \"ratingAverages\": {},\r",
+									"        \"ratingTotalsAndCounts\": {},\r",
+									"        \"skillTrade\": {\r",
+									"          \"type\": \"array\",\r",
+									"          \"items\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"              \"id\": {\r",
+									"                \"type\": \"string\"\r",
+									"              },\r",
+									"              \"text\": {\r",
+									"                \"type\": \"string\"\r",
+									"              }\r",
+									"            },\r",
+									"            \"required\": [\r",
+									"              \"id\",\r",
+									"              \"text\"\r",
+									"            ]\r",
+									"          }\r",
+									"        },\r",
+									"        \"isTradable\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"isActive\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"createdOn\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"updatedOn\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"updatedBy\": {},\r",
+									"        \"isDeleted\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"sellerId\",\r",
+									"        \"charge\",\r",
+									"        \"title\",\r",
+									"        \"description\",\r",
+									"        \"serviceType\",\r",
+									"        \"locationType\",\r",
+									"        \"availability\",\r",
+									"        \"workSample\",\r",
+									"        \"categoryId\",\r",
+									"        \"subcategoryId\",\r",
+									"        \"tags\",\r",
+									"        \"comments\",\r",
+									"        \"ratings\",\r",
+									"        \"ratingAverages\",\r",
+									"        \"ratingTotalsAndCounts\",\r",
+									"        \"skillTrade\",\r",
+									"        \"isTradable\",\r",
+									"        \"isActive\",\r",
+									"        \"createdOn\",\r",
+									"        \"createdBy\",\r",
+									"        \"updatedOn\",\r",
+									"        \"updatedBy\",\r",
+									"        \"isDeleted\"\r",
+									"      ]\r",
+									"    },\r",
+									"    \"categoryTuple\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"item1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"item2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"item1\",\r",
+									"        \"item2\"\r",
+									"      ]\r",
+									"    },\r",
+									"    \"currentUserId\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"comments\": {}\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"serviceListing\",\r",
+									"    \"categoryTuple\",\r",
+									"    \"currentUserId\",\r",
+									"    \"comments\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Check title\r",
+									"    pm.expect(jsonData.serviceListing.title).to.eql(\"Lyric Teaching\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/GetService/?id={{listingId}}",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"GetService",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{listingId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"editFlag\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\",\r",
+									"    \"editFlag\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"   var jsonData = pm.response.json();\r",
+									"   \r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Music\",\r\n  \"description\": \"Music service\",\r\n  \"categoryId\": \"5\",\r\n  \"subcategoryId\": \"4\",\r\n  \"tags\": [\r\n    {\r\n      \"id\": \"music\",\r\n      \"text\": \"music\"\r\n    },\r\n    {\r\n      \"id\": \"teaching\",\r\n      \"text\": \"teaching\"\r\n    }\r\n  ],\r\n  \"serviceType\": \"0\",\r\n  \"locationType\": \"1\",\r\n  \"availability\": {\r\n    \"startDate\": \"2024-01-01\",\r\n    \"endDate\": \"\",\r\n    \"dayEntries\": [\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"\",\r\n        \"EndTime\": \"\"\r\n      },\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"12:00\"\r\n      },\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"17:00\"\r\n      },\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"17:00\"\r\n      },\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"12:00\"\r\n      },\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"09:00\",\r\n        \"EndTime\": \"12:00\"\r\n      },\r\n      {\r\n        \"Available\": false,\r\n        \"StartTime\": \"\",\r\n        \"EndTime\": \"\"\r\n      }\r\n    ]\r\n  },\r\n  \"skillTrade\": [\r\n    {\r\n      \"id\": \"dancing\",\r\n      \"text\": \"dancing\"\r\n    }\r\n  ],\r\n  \"isTradable\": false,\r\n  \"charge\": 10,\r\n  \"credentials\": true,\r\n  \"isActive\": true,\r\n  \"id\": \"{{listingId}}\",\r\n  \"sellerId\": \"648bee8901ef0d0001e5ba91\",\r\n  \"workSample\": null,\r\n  \"comments\": null,\r\n  \"ratings\": null,\r\n  \"ratingAverages\": null,\r\n  \"ratingTotalsAndCounts\": null,\r\n  \"createdOn\": \"2023-10-26T08:56:50.695Z\",\r\n  \"createdBy\": \"648bee8901ef0d0001e5ba91\",\r\n  \"updatedOn\": \"0001-01-01T00:00:00Z\",\r\n  \"updatedBy\": null,\r\n  \"isDeleted\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/addListing",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"addListing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteListing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"title\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"title\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"  var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    //Check success value\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //Check deleted listing title\r",
+									"    pm.expect(jsonData.title).to.eql(\"Music\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " \"{{listingId}}\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/deleteServiceListing",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"deleteServiceListing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggleActive",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"active\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"active\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion  - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //Check success value\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " \"{{listingId}}\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/toggleIsActive",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"toggleIsActive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBalance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"balance\": {\r",
+									"      \"type\": \"number\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"balance\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Check title\r",
+									"    pm.expect(jsonData.balance).to.eql(100);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/getBalance",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"getBalance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chat",
+			"item": [
+				{
+					"name": "getChatList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"result\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"userIdToList\": {},\r",
+									"          \"userIdTo\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"userNameTo\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"userIdFrom\": {},\r",
+									"          \"userNameFrom\": {},\r",
+									"          \"profilePicUrl\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"unreadMessages\": {\r",
+									"            \"type\": \"number\"\r",
+									"          }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"          \"userIdToList\",\r",
+									"          \"userIdTo\",\r",
+									"          \"userNameTo\",\r",
+									"          \"userIdFrom\",\r",
+									"          \"userNameFrom\",\r",
+									"          \"profilePicUrl\",\r",
+									"          \"unreadMessages\"\r",
+									"        ]\r",
+									"      }\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"result\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.result.length).to.greaterThan(0);\r",
+									"});\r",
+									"    pm.environment.set(\"firstChatroomId\", jsonData.result[0].userIdTo);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"UserIdToList\": [\r\n    \"64239b8df0a1190001c5ad0d\",\r\n    \"5c5f42f4bea4490005ebe9cd\",\r\n    \"64220cd89b6ef10001a5439a\",\r\n    \"648bee8901ef0d0001e5ba91\",\r\n    \"648bee8901ef0d0001e5ba91\",\r\n    \"643287f83a50cb0001ec0f4c\"\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getChatRoomDetailsList/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getChatRoomDetailsList",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFirstChatroom",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema =  {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"chatroom\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"myCurrentUser\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"chatroom\",\r",
+									"    \"myCurrentUser\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"   \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //id check\r",
+									"    var expectedFirstChatroomId = pm.environment.get(\"firstChatroomId\");\r",
+									"    pm.expect(jsonData.chatroom).to.eql(expectedFirstChatroomId);\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getFirstChatroom",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getFirstChatroom"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notification",
+			"item": [
+				{
+					"name": "getNotification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"userNotifications\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"name\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"url\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"message\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"isViewed\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"          },\r",
+									"          \"updatedOn\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"notificationType\": {\r",
+									"            \"type\": \"number\"\r",
+									"          },\r",
+									"          \"icon\": {\r",
+									"            \"type\": \"string\"\r",
+									"          }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"          \"id\",\r",
+									"          \"name\",\r",
+									"          \"url\",\r",
+									"          \"message\",\r",
+									"          \"isViewed\",\r",
+									"          \"updatedOn\",\r",
+									"          \"notificationType\",\r",
+									"          \"icon\"\r",
+									"        ]\r",
+									"      }\r",
+									"    },\r",
+									"    \"totalCount\": {\r",
+									"      \"type\": \"number\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"userNotifications\",\r",
+									"    \"totalCount\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    \r",
+									"    });\r",
+									"//Assertion 4 - Response userNotifications length check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.userNotifications.length).to.greaterThan(0);\r",
+									"});\r",
+									"\r",
+									"    pm.environment.set(\"notificationToDeleteId\", jsonData.userNotifications[0].id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notification/notification/getNotification?numberOfNotifications=5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notification",
+								"notification",
+								"getNotification"
+							],
+							"query": [
+								{
+									"key": "numberOfNotifications",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "readAllNotification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									" pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"        pm.expect(jsonData.success).to.eql(true);\r",
+									"    \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notification/notification/readAllNotifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notification",
+								"notification",
+								"readAllNotifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "readMarkedNotifications",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									" //Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Assertion 2 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {  \r",
+									"    pm.expect(jsonData.success).to.eql(true);  \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notification/notification/readMarkedNotifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notification",
+								"notification",
+								"readMarkedNotifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeNotification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);   \r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "ids[]",
+									"value": "{{notificationToDeleteId}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notification/notification/removeMarkedNotifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notification",
+								"notification",
+								"removeMarkedNotifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTradeRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"data\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {\r",
+									"        \"type\": \"object\",\r",
+									"        \"properties\": {\r",
+									"          \"id\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"senderId\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"senderName\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"recipientId\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"recipientName\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"listingId\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"totalHours\": {\r",
+									"            \"type\": \"number\"\r",
+									"          },\r",
+									"          \"totalAmount\": {\r",
+									"            \"type\": \"number\"\r",
+									"          },\r",
+									"          \"status\": {\r",
+									"            \"type\": \"number\"\r",
+									"          },\r",
+									"          \"isViewed\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"          },\r",
+									"          \"isCompletedBySender\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"          },\r",
+									"          \"isCompletedBySeller\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"          },\r",
+									"          \"category\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"categoryId\": {\r",
+									"            \"type\": \"number\"\r",
+									"          },\r",
+									"          \"title\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"message\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"senderLastName\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"senderCity\": {},\r",
+									"          \"senderCountry\": {},\r",
+									"          \"createdOn\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"updatedOn\": {\r",
+									"            \"type\": \"string\"\r",
+									"          },\r",
+									"          \"isTradable\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"          }\r",
+									"        },\r",
+									"        \"required\": [\r",
+									"          \"id\",\r",
+									"          \"senderId\",\r",
+									"          \"senderName\",\r",
+									"          \"recipientId\",\r",
+									"          \"recipientName\",\r",
+									"          \"listingId\",\r",
+									"          \"totalHours\",\r",
+									"          \"totalAmount\",\r",
+									"          \"status\",\r",
+									"          \"isViewed\",\r",
+									"          \"isCompletedBySender\",\r",
+									"          \"isCompletedBySeller\",\r",
+									"          \"category\",\r",
+									"          \"categoryId\",\r",
+									"          \"title\",\r",
+									"          \"message\",\r",
+									"          \"senderLastName\",\r",
+									"          \"senderCity\",\r",
+									"          \"senderCountry\",\r",
+									"          \"createdOn\",\r",
+									"          \"updatedOn\",\r",
+									"          \"isTradable\"\r",
+									"        ]\r",
+									"      }\r",
+									"    },\r",
+									"    \"totalCount\": {\r",
+									"      \"type\": \"number\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"data\",\r",
+									"    \"totalCount\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () { \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.data.length).to.greaterThan(0);\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"offset\": 0,\r\n  \"limit\": 5,\r\n  \"sortBy\": \"createdOn\",\r\n  \"direction\": \"descending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrlListing}}/listing/listing/getTradeRequests?requestType=sentRequest",
+							"host": [
+								"{{baseUrlListing}}"
+							],
+							"path": [
+								"listing",
+								"listing",
+								"getTradeRequests"
+							],
+							"query": [
+								{
+									"key": "requestType",
+									"value": "sentRequest"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "getProfileDetail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"enableEdit\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"firstName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"lastName\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"availability\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"uId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"id\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"userId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"availabilityType\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"numberOfAvailableHours\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"earnTarget\": {\r",
+									"          \"type\": \"number\"\r",
+									"        },\r",
+									"        \"isDeleted\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"uId\",\r",
+									"        \"id\",\r",
+									"        \"userId\",\r",
+									"        \"availabilityType\",\r",
+									"        \"numberOfAvailableHours\",\r",
+									"        \"earnTarget\",\r",
+									"        \"isDeleted\"\r",
+									"      ]\r",
+									"    },\r",
+									"    \"location\": {},\r",
+									"    \"languages\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"skills\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"educations\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"certifications\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": {}\r",
+									"    },\r",
+									"    \"profilePhoto\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"contentType\": {},\r",
+									"        \"serializerSettings\": {},\r",
+									"        \"statusCode\": {},\r",
+									"        \"value\": {\r",
+									"          \"type\": \"object\",\r",
+									"          \"properties\": {\r",
+									"            \"success\": {\r",
+									"              \"type\": \"boolean\"\r",
+									"            },\r",
+									"            \"myPhotoUrl\": {\r",
+									"              \"type\": \"string\"\r",
+									"            },\r",
+									"            \"otherPhotoUrl\": {\r",
+									"              \"type\": \"string\"\r",
+									"            }\r",
+									"          },\r",
+									"          \"required\": [\r",
+									"            \"success\",\r",
+									"            \"myPhotoUrl\",\r",
+									"            \"otherPhotoUrl\"\r",
+									"          ]\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"contentType\",\r",
+									"        \"serializerSettings\",\r",
+									"        \"statusCode\",\r",
+									"        \"value\"\r",
+									"      ]\r",
+									"    },\r",
+									"    \"description\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"id\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"personId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"description\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"isDeleted\": {\r",
+									"          \"type\": \"boolean\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"id\",\r",
+									"        \"personId\",\r",
+									"        \"description\",\r",
+									"        \"isDeleted\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"enableEdit\",\r",
+									"    \"firstName\",\r",
+									"    \"lastName\",\r",
+									"    \"availability\",\r",
+									"    \"location\",\r",
+									"    \"languages\",\r",
+									"    \"skills\",\r",
+									"    \"educations\",\r",
+									"    \"certifications\",\r",
+									"    \"profilePhoto\",\r",
+									"    \"description\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.firstName).to.eql(\"Mars\");\r",
+									"    pm.expect(jsonData.lastName).to.eql(\"Advanced\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getProfileDetails/?id=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getProfileDetails",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAvalability",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									" var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.message).to.eql(\"Availability Updated Successfully\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"AvailabilityType\": \"1\",\r\n  \"AvailableHours\": 2,\r\n  \"EarnTarget\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateAvailability",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateAvailability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addInfo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.message).to.eql(\"Description Updated Successfully\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"personId\": 0,\r\n  \"description\": \"Software testing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addInfo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getInfo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"personId\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"value\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"personId\",\r",
+									"    \"value\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.value).to.eql(\"Software testing\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getInfo/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getInfo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "isUserAuthenticated",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"isAuthenticated\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"username\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"isAuthenticated\",\r",
+									"    \"username\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.isAuthenticated).to.eql(true);\r",
+									"    pm.expect(jsonData.username).to.eql(\"Mars\");\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/isUserAuthenticated",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"isUserAuthenticated"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "skill",
+			"item": [
+				{
+					"name": "addSkill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"skillId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PersonSkillId\": 0,\r\n  \"Skill\": \"English\",\r\n  \"ExperienceLevel\": \"Expert\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addSkillWithoutSkillName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"skillId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PersonSkillId\": 0,\r\n  \"Skill\": \"\",\r\n  \"ExperienceLevel\": \"Beginner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSkill Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"skill\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"skill\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //Message check\r",
+									"    pm.expect(jsonData.skill).to.eql(\"\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"PersonSkillId\":\"{{skillId}}\",\"Skill\":\"testing\",\"ExperienceLevel\":\"Expert\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addSkillWithoutLevel",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"//Setting an enviroment variable\r",
+									"    pm.environment.set(\"skillId\", jsonData.id);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PersonSkillId\": 0,\r\n  \"Skill\": \"Swimming\",\r\n  \"ExperienceLevel\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSkill Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"skill\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"skill\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //Message check\r",
+									"    pm.expect(jsonData.skill).to.eql(\"Swimming\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"PersonSkillId\":\"{{skillId}}\",\"Skill\":\"testing\",\"ExperienceLevel\":\"Expert\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add existing skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"    pm.expect(jsonData.message).to.eql(\"This skill is already exist in your skill list.\");\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PersonSkillId\": 0,\r\n  \"Skill\": \"English\",\r\n  \"ExperienceLevel\": \"Expert\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/addSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"addSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSkill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"array\",\r",
+									"  \"items\": {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"      \"personSkillId\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"skill\": {\r",
+									"        \"type\": \"string\"\r",
+									"      },\r",
+									"      \"experienceLevel\": {\r",
+									"        \"type\": \"string\"\r",
+									"      }\r",
+									"    },\r",
+									"    \"required\": [\r",
+									"      \"personSkillId\",\r",
+									"      \"skill\",\r",
+									"      \"experienceLevel\"\r",
+									"    ]\r",
+									"  }\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    pm.expect(jsonData.length).to.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/getSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"getSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSkill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"id\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"id\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //id check\r",
+									"    var expectedSkillId = pm.environment.get(\"skillId\");\r",
+									"    pm.expect(jsonData.id).to.eql(expectedSkillId);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PersonSkillId\": \"{{skillId}}\",\r\n  \"Skill\": \"Testing\",\r\n  \"ExperienceLevel\": \"Beginner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update same skill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"message\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"message\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"    //message check\r",
+									"    pm.expect(jsonData.message).to.eql(\"This skill is already added to your skill list.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"PersonSkillId\": \"{{skillId}}\",\r\n  \"Skill\": \"Testing\",\r\n  \"ExperienceLevel\": \"Beginner\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/updateSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"updateSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSkill",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var schema = {\r",
+									"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r",
+									"  \"title\": \"Generated schema for Root\",\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"success\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"skill\": {\r",
+									"      \"type\": \"string\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"success\",\r",
+									"    \"skill\"\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"//Assertion 1 - Status code check\r",
+									"    pm.test(\"Status code check\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Assertion 2 Schema check\r",
+									"    pm.test('Schema is valid', function() {\r",
+									"    pm.expect(tv4.validate(jsonData, schema)).to.be.true;\r",
+									"});\r",
+									"\r",
+									"//Assertion 3 - Response value check\r",
+									"    pm.test(\"Check if the response contains the expected value\", function () {\r",
+									"    //success check\r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    //Message check\r",
+									"    pm.expect(jsonData.skill).to.eql(\"Testing\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"PersonSkillId\":\"{{skillId}}\",\"Skill\":\"testing\",\"ExperienceLevel\":\"Expert\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/profile/profile/deleteSkill",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"profile",
+								"profile",
+								"deleteSkill"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrlAuth",
+			"value": "http://localhost:60968",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:60190",
+			"type": "string"
+		},
+		{
+			"key": "baseUrlListing",
+			"value": "http://localhost:51689",
+			"type": "string"
+		}
+	]
+}
